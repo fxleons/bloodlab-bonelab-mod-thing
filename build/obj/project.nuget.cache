@@ -1,0 +1,11 @@
+{
+  "version": 2,
+  "dgSpecHash": "cV7XEn4u/k0=",
+  "success": true,
+  "projectFilePath": "/workspaces/bloodlab-bonelab-mod-thing/build/BloodLabMod.csproj",
+  "expectedPackageFiles": [
+    "/home/codespace/.nuget/packages/microsoft.netcore.app.ref/6.0.36/microsoft.netcore.app.ref.6.0.36.nupkg.sha512",
+    "/home/codespace/.nuget/packages/microsoft.aspnetcore.app.ref/6.0.36/microsoft.aspnetcore.app.ref.6.0.36.nupkg.sha512"
+  ],
+  "logs": []
+}

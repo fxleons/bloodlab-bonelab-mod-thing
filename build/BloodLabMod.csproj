@@ -1,0 +1,14 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <OutputPath>build_out</OutputPath>
+    <AssemblyName>Bloodworks_RagdollCompatible_Bonelab</AssemblyName>
+    <LangVersion>latest</LangVersion>
+    <Nullable>enable</Nullable>
+    <EnableDefaultCompileItems>false</EnableDefaultCompileItems>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="..\ModSource\**\*.cs" />
+    <Compile Include="stubs\**\*.cs" />
+  </ItemGroup>
+</Project>
