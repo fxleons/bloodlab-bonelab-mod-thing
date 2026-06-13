@@ -8,6 +8,7 @@ namespace BloodLabMod.Core
 
         public static void SpawnWallSplat(Vector3 pos, Vector3 normal, float size, float intensity)
         {
+            if (!BloodConfig.EnableBloodDecals) return;
             var go = RuntimeBloodAssets.CreateBloodDecal();
             if (go == null) return;
             go.transform.position = pos + normal * 0.01f;

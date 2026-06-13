@@ -10,6 +10,9 @@ namespace BloodLabMod.Core
             public float BloodMultiplier = 1.0f;
             public float PlayerBloodMultiplier = 1.0f;
             public float NPCBloodMultiplier = 1.0f;
+            public float DropletSize = 1.0f;
+            public bool EnableDripping = true;
+            public bool EnableBloodDecals = true;
             public float BleedingDurationMultiplier = 1.0f;
             public int MaxDroplets = 500;
             public int MaxPuddles = 200;

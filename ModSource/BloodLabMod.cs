@@ -15,6 +15,8 @@ namespace BloodLabMod.Core
             initialized = true;
             MelonLogger.Msg("BloodLabMod initializing...");
             ConfigManager.Load();
+            BloodConfig.Initialize();
+            BloodMenuIntegration.Initialize();
             PoolManager.Initialize();
             WoundManager.Initialize();
             DropletManager.Initialize();
@@ -29,6 +31,7 @@ namespace BloodLabMod.Core
 
         public override void OnUpdate()
         {
+            BloodMenuIntegration.Update();
             WoundManager.UpdateAll(Time.deltaTime);
             DropletManager.UpdateAll(Time.deltaTime);
             PuddleManager.UpdateAll(Time.deltaTime);

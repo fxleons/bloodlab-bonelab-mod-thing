@@ -33,6 +33,7 @@ namespace BloodLabMod.Core
             if (go == null) return;
             go.transform.position = pos;
             go.transform.rotation = Random.rotation;
+            go.transform.localScale = Vector3.one * ConfigManager.Settings.DropletSize;
             go.SetActive(true);
             var bd = go.GetComponent<BloodDroplet>();
             if (bd == null) bd = go.AddComponent<BloodDroplet>();

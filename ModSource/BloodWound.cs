@@ -37,8 +37,11 @@ namespace BloodLabMod.Core
             // bleed over time: rate reduces as bleedIntensity decays
             if (bleedIntensity > 0f)
             {
-                var amount = bleedIntensity * dt * (1f - (lifeTimer / maxLife));
-                DropletManager.SpawnDrip(Parent.TransformPoint(LocalPosition), Normal, amount);
+                if (BloodConfig.EnableDripping)
+                {
+                    var amount = bleedIntensity * dt * (1f - (lifeTimer / maxLife));
+                    DropletManager.SpawnDrip(Parent.TransformPoint(LocalPosition), Normal, amount);
+                }
                 bleedIntensity = Mathf.Max(0f, bleedIntensity - dt * 0.01f);
             }
         }
