@@ -1,18 +1,12 @@
-# BloodLab BONELAB Mod
+# BLOODLAB
 
-## Quick install
+## Thank you!
 
-1. Build `build/BloodLabMod.csproj` in `Release`.
-2. Copy `build/build_out/net6.0/Bloodworks_RagdollCompatible_Bonelab.dll` into BONELAB's `Mods/` folder.
-3. Launch BONELAB with MelonLoader installed.
+Hey! Thank you for downloading BLOODLAB, it's a personal project I made inspired by BLOODWORKS. Honestly, I don't know how BONELAB doesn't have any good blood mods, I had to make this just out of pure anger for not finding one.
 
-> This version generates its blood decals, droplets, and puddles at runtime, so no prefab setup is required.
+> This version generates its blood decals, droplets, and puddles at runtime, so no prefab setup is required. Don't worry about SDK mods or something like that, since it's already done.
 
-This repository contains a MelonLoader-compatible BONELAB mod implementing a realistic blood and bleeding system.
-
-Files are in `ModSource/` and are ready to be compiled into a Unity/MelonLoader mod DLL.
-
-Key features implemented in code:
+Key features implemented:
 - Impact blood particles and physics droplets
 - Persistent wounds attached to body parts
 - Realistic bleeding over time
@@ -21,28 +15,15 @@ Key features implemented in code:
 - Weapon and player blood tracking
 - Object pooling and configurable limits
 
-Build & MelonLoader setup:
-1. Create a Unity project (2020.3 LTS or compatible with BONELAB modding workflow).
-2. Copy `ModSource/*.cs` into an `Assembly Definition` or compile into a DLL using a C# project targeting the game's runtime.
-3. Add MelonLoader and required references (UnityEngine.dll, UnityEngine.CoreModule.dll, etc.) to the build.
-4. Build the project in `Release`.
-5. Place the produced DLL into BONELAB’s MelonLoader `Mods/` folder.
+Let me explain what I did in a simple way.
 
-Plug-and-play notes:
-- The current mod version generates blood decals, droplets, and puddles at runtime.
-- No external `BloodPrefabs/` resources are required.
-- The final DLL output is `build/build_out/net6.0/Bloodworks_RagdollCompatible_Bonelab.dll`.
+# The blood
+Simple. Get vanilla blood particles and decals, then use them to my advantage. Making the blood decals small, particles turn into droplets, and droplets turn into little blood drops.
+Eventually, after certain amount of shots, the NPC (or player) will bleed out and die of blood loss.
+Blood can splatter on walls, ceilings and floors. Only spawning on ceilings if the NPC is tall enough, or if you're in a situation where you're really close to the ceiling.
 
-Compatibility:
-- Works alongside an existing ragdoll mod because it only detects impacts and triggers blood effects.
-- It does not modify ragdoll joints, physics, or transforms.
+# Weapon to blood physics
+The weapon does raycast things and makes funny bullets. Well, what I did was catch that raycast and bullet thing and use it to see where to send the blood to. Easy as that.
 
-Integration notes:
-- `HookManager.OnEntityHit(...)` is the central integration point. Call it from BONELAB's damage handlers for bullets, melee, explosions, and environmental damage.
-- Use `BodyPartIdentifier.Identify(root, hitTransform)` to guess a body part.
-- For player bleeding, call `PlayerBloodManager.AddWound(playerTransform, localPos, normal, damage, bodyPart)`.
-
-Configuration:
-- A `BloodLabModConfig.json` is created in the game's data path on first run. Edit it to adjust multipliers and performance limits.
-
-License: Use and adapt freely for personal modding. Credit is appreciated.
+## PLEASE like the project, it took so long to make that I might have grown a beard while working on it.
+-# programming time took like a month or so btw
