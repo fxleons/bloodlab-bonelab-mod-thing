@@ -57,7 +57,21 @@ namespace BloodLabMod.Core
         {
             try
             {
-                var json = JsonUtility.ToJson(Settings, true);
+                string json;
+                try
+                {
+                    json = JsonUtility.ToJson(Settings, true);
+                }
+                catch (System.MissingMethodException)
+                {
+                    // Runtime Unity may not expose the overload with the prettyPrint boolean.
+                    json = JsonUtility.ToJson(Settings);
+                }
+                catch
+                {
+                    json = JsonUtility.ToJson(Settings);
+                }
+
                 File.WriteAllText(configPath, json);
             }
             catch { }
