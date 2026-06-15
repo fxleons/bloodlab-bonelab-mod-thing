@@ -13,6 +13,12 @@ namespace BloodLabMod.Core
             public float DropletSize = 1.0f;
             public bool EnableDripping = true;
             public bool EnableBloodDecals = true;
+            public bool EnableBloodPools = true;
+            public float PoolDelay = 30f;
+            public float PoolGrowthSpeed = 0.1f;
+            public float PoolMaxSize = 1.5f;
+            public int MaxActivePools = 12;
+            public bool HeadshotsOnly = false;
             public float BleedingDurationMultiplier = 1.0f;
             public int MaxDroplets = 500;
             public int MaxPuddles = 200;

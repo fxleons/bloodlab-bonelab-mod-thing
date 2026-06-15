@@ -24,6 +24,9 @@ namespace BloodLabMod.Core
             // spawn impact particles and droplets
             DropletManager.SpawnGore(hitWorldPos, hitNormal, damage * ConfigManager.Settings.BloodMultiplier);
 
+            // track hits for pool spawning conditions. Pools only spawn under corpses after delay.
+            BloodPoolManager.TrackHit(entity, bodyPart, damage, hitSource);
+
             // spawn wall decals if surface
             if (hitSource == null)
             {

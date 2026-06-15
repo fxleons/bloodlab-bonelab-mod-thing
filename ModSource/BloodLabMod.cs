@@ -18,6 +18,7 @@ namespace BloodLabMod.Core
             BloodConfig.Initialize();
             BloodMenuIntegration.Initialize();
             PoolManager.Initialize();
+            BloodPoolManager.Initialize();
             WoundManager.Initialize();
             DropletManager.Initialize();
             PuddleManager.Initialize();
@@ -35,6 +36,7 @@ namespace BloodLabMod.Core
             WoundManager.UpdateAll(Time.deltaTime);
             DropletManager.UpdateAll(Time.deltaTime);
             PuddleManager.UpdateAll(Time.deltaTime);
+            BloodPoolManager.UpdateAll(Time.deltaTime);
             WeaponBloodManager.UpdateAll(Time.deltaTime);
             PlayerBloodManager.UpdateAll(Time.deltaTime);
         }

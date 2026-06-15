@@ -37,6 +37,12 @@ namespace BloodLabMod.Core
                 var settingsMenu = CreateSubMenu(rootCategory, SubmenuName);
                 if (settingsMenu == null) return;
 
+                AddToggle(settingsMenu, "Enable Blood Pools", () => BloodConfig.EnableBloodPools, v => BloodConfig.EnableBloodPools = v);
+                AddSlider(settingsMenu, "Pool Delay (seconds)", BloodConfig.MinPoolDelay, BloodConfig.MaxPoolDelay, () => BloodConfig.PoolDelay, v => BloodConfig.PoolDelay = v);
+                AddSlider(settingsMenu, "Pool Growth Speed", BloodConfig.MinPoolGrowthSpeed, BloodConfig.MaxPoolGrowthSpeed, () => BloodConfig.PoolGrowthSpeed, v => BloodConfig.PoolGrowthSpeed = v);
+                AddSlider(settingsMenu, "Maximum Pool Size", BloodConfig.MinPoolMaxSize, BloodConfig.MaxPoolMaxSize, () => BloodConfig.PoolMaxSize, v => BloodConfig.PoolMaxSize = v);
+                AddSlider(settingsMenu, "Maximum Active Pools", BloodConfig.MinMaxActivePools, BloodConfig.MaxMaxActivePools, () => BloodConfig.MaxActivePools, v => BloodConfig.MaxActivePools = (int)Mathf.Clamp(v + 0.5f, BloodConfig.MinMaxActivePools, BloodConfig.MaxMaxActivePools));
+                AddToggle(settingsMenu, "Headshots Only", () => BloodConfig.HeadshotsOnly, v => BloodConfig.HeadshotsOnly = v);
                 AddSlider(settingsMenu, "NPC Blood Multiplier", BloodConfig.MinNPCBloodMultiplier, BloodConfig.MaxNPCBloodMultiplier, () => BloodConfig.NPCBloodMultiplier, v => BloodConfig.NPCBloodMultiplier = v);
                 AddSlider(settingsMenu, "Droplet Size", BloodConfig.MinDropletSize, BloodConfig.MaxDropletSize, () => BloodConfig.DropletSize, v => BloodConfig.DropletSize = v);
                 AddSlider(settingsMenu, "Blood Intensity", BloodConfig.MinBloodIntensity, BloodConfig.MaxBloodIntensity, () => BloodConfig.BloodIntensity, v => BloodConfig.BloodIntensity = v);
