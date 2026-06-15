@@ -1,0 +1,13 @@
+/workspaces/bloodlab-bonelab-mod-thing/build/build_out/BloodLabMod.deps.json
+/workspaces/bloodlab-bonelab-mod-thing/build/build_out/BloodLabMod.dll
+/workspaces/bloodlab-bonelab-mod-thing/build/build_out/BloodLabMod.pdb
+/workspaces/bloodlab-bonelab-mod-thing/build/obj/Release/BloodLabMod.csproj.AssemblyReference.cache
+/workspaces/bloodlab-bonelab-mod-thing/build/obj/Release/BloodLabMod.GeneratedMSBuildEditorConfig.editorconfig
+/workspaces/bloodlab-bonelab-mod-thing/build/obj/Release/BloodLabMod.AssemblyInfoInputs.cache
+/workspaces/bloodlab-bonelab-mod-thing/build/obj/Release/BloodLabMod.AssemblyInfo.cs
+/workspaces/bloodlab-bonelab-mod-thing/build/obj/Release/BloodLabMod.csproj.CoreCompileInputs.cache
+/workspaces/bloodlab-bonelab-mod-thing/build/obj/Release/BloodLabMod.sourcelink.json
+/workspaces/bloodlab-bonelab-mod-thing/build/obj/Release/BloodLabMod.dll
+/workspaces/bloodlab-bonelab-mod-thing/build/obj/Release/refint/BloodLabMod.dll
+/workspaces/bloodlab-bonelab-mod-thing/build/obj/Release/BloodLabMod.pdb
+/workspaces/bloodlab-bonelab-mod-thing/build/obj/Release/ref/BloodLabMod.dll

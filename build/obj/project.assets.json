@@ -14,7 +14,7 @@
     "version": "1.0.0",
     "restore": {
       "projectUniqueName": "/workspaces/bloodlab-bonelab-mod-thing/build/BloodLabMod.csproj",
-      "projectName": "Bloodworks_RagdollCompatible_Bonelab",
+      "projectName": "BloodLabMod",
       "projectPath": "/workspaces/bloodlab-bonelab-mod-thing/build/BloodLabMod.csproj",
       "packagesPath": "/home/codespace/.nuget/packages/",
       "outputPath": "/workspaces/bloodlab-bonelab-mod-thing/build/obj/",
