@@ -14,7 +14,7 @@ namespace BloodLabMod.Core
             public bool EnableDripping = true;
             public bool EnableBloodDecals = true;
             public bool EnableBloodPools = true;
-            public float PoolDelay = 30f;
+            public float PoolDelay = 10f;
             public float PoolGrowthSpeed = 0.1f;
             public float PoolMaxSize = 1.5f;
             public int MaxActivePools = 12;

@@ -3,13 +3,15 @@ using UnityEngine;
 
 namespace BloodLabMod.Core
 {
-    // Manages delayed ground pools spawned beneath severe NPC ragdoll hits.
     public static class BloodPoolManager
     {
-        private const int HighWoundCountThreshold = 6;
+        private const string PoolPrefabPath = "BloodPrefabs/BloodPuddle";
+        private const float HighWoundCountThreshold = 6;
         private const float HighWoundDamageThreshold = 6f;
         private const float RaycastHeight = 0.5f;
         private const float RaycastDistance = 2f;
+        private const float SpawnOffset = 0.01f;
+        private const float InitialPoolSize = 0.05f;
 
         private static readonly List<PendingPool> pendingPools = new List<PendingPool>(16);
         private static readonly List<BloodPool> activePools = new List<BloodPool>(16);
@@ -39,7 +41,6 @@ namespace BloodLabMod.Core
 
                 if (activePools.Count >= BloodConfig.MaxActivePools)
                 {
-                    // Keep candidate alive in case pools free up later.
                     continue;
                 }
 
@@ -58,6 +59,9 @@ namespace BloodLabMod.Core
             if (!BloodConfig.EnableBloodPools || entity == null)
                 return;
 
+            if (!IsValidNpcDeathBody(entity))
+                return;
+
             int instanceId = entity.GetInstanceID();
             var pending = FindPending(instanceId);
             if (pending == null)
@@ -69,6 +73,21 @@ namespace BloodLabMod.Core
             pending.RecordHit(bodyPart, damage);
         }
 
+        private static bool IsValidNpcDeathBody(Transform entity)
+        {
+            var lowerName = entity.name.ToLowerInvariant();
+            if (lowerName.Contains("player"))
+                return false;
+
+            if (lowerName.Contains("ragdoll") || lowerName.Contains("pelvis") || lowerName.Contains("hips")
+                || lowerName.Contains("spine") || lowerName.Contains("torso") || lowerName.Contains("body"))
+            {
+                return true;
+            }
+
+            return entity.GetComponent<Animator>() != null || entity.GetComponentInChildren<Animator>() != null;
+        }
+
         private static PendingPool FindPending(int instanceId)
         {
             for (int i = 0; i < pendingPools.Count; ++i)
@@ -76,6 +95,7 @@ namespace BloodLabMod.Core
                 if (pendingPools[i].EntityId == instanceId)
                     return pendingPools[i];
             }
+
             return null;
         }
 
@@ -88,7 +108,8 @@ namespace BloodLabMod.Core
             var poolPosition = anchorPosition;
             var poolNormal = Vector3.up;
 
-            if (Physics.Raycast(anchorPosition + Vector3.up * RaycastHeight, Vector3.down, out var hit, RaycastDistance, ~0, QueryTriggerInteraction.Ignore))
+            if (Physics.Raycast(anchorPosition + Vector3.up * RaycastHeight, Vector3.down, out var hit, RaycastDistance,
+                ~0, QueryTriggerInteraction.Ignore))
             {
                 poolPosition = hit.point;
                 poolNormal = hit.normal;
@@ -99,12 +120,12 @@ namespace BloodLabMod.Core
                 poolNormal = hit.normal;
             }
 
-            var poolGO = PoolManager.Get("BloodPrefabs/BloodPuddle");
+            var poolGO = PoolManager.Get(PoolPrefabPath);
             if (poolGO == null)
                 return;
 
             poolGO.transform.SetParent(null, true);
-            poolGO.transform.position = poolPosition + poolNormal * 0.01f;
+            poolGO.transform.position = poolPosition + poolNormal * SpawnOffset;
             poolGO.transform.rotation = Quaternion.LookRotation(poolNormal);
             poolGO.SetActive(true);
 
@@ -134,8 +155,8 @@ namespace BloodLabMod.Core
             public void RecordHit(string bodyPart, float damage)
             {
                 HitCount += 1;
-                TotalDamage += damage;
-                if (!HasHeadshot && bodyPart != null && bodyPart.ToLower().Contains("head"))
+                TotalDamage += Mathf.Max(0f, damage);
+                if (!HasHeadshot && !string.IsNullOrEmpty(bodyPart) && bodyPart.ToLowerInvariant().Contains("head"))
                 {
                     HasHeadshot = true;
                 }
@@ -160,9 +181,9 @@ namespace BloodLabMod.Core
             public BloodPool(GameObject poolGO, float targetSize, float growthSpeed)
             {
                 this.poolGO = poolGO;
-                this.targetSize = Mathf.Max(0.01f, targetSize);
+                this.targetSize = Mathf.Max(InitialPoolSize, targetSize);
                 this.growthSpeed = Mathf.Max(0.01f, growthSpeed);
-                currentSize = 0.01f;
+                currentSize = InitialPoolSize;
                 UpdateScale();
             }
 
@@ -183,7 +204,7 @@ namespace BloodLabMod.Core
                 if (poolGO == null)
                     return;
 
-                var scale = new Vector3(currentSize, 1f, currentSize);
+                var scale = new Vector3(currentSize, currentSize, 1f);
                 poolGO.transform.localScale = scale;
             }
         }
