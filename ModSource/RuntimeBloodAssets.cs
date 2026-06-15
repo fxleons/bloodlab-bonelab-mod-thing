@@ -52,13 +52,13 @@ namespace BloodLabMod.Core
             return go;
         }
 
-        public static GameObject CreatePrefab(string resourcePath)
+        public static GameObject CreatePrefab(string prefabKey)
         {
-            if (resourcePath.Contains("BloodDroplet"))
+            if (prefabKey == "BloodDroplet")
                 return CreateBloodDroplet();
-            if (resourcePath.Contains("BloodPuddle"))
+            if (prefabKey == "BloodPuddle")
                 return CreateBloodPuddle();
-            if (resourcePath.Contains("BloodDecal"))
+            if (prefabKey == "BloodDecal")
                 return CreateBloodDecal();
             return null;
         }

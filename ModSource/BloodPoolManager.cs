@@ -5,7 +5,7 @@ namespace BloodLabMod.Core
 {
     public static class BloodPoolManager
     {
-        private const string PoolPrefabPath = "BloodPrefabs/BloodPuddle";
+        internal const string PuddlePrefabKey = "BloodPuddle";
         private const float HighWoundCountThreshold = 6;
         private const float HighWoundDamageThreshold = 6f;
         private const float RaycastHeight = 0.5f;
@@ -120,7 +120,7 @@ namespace BloodLabMod.Core
                 poolNormal = hit.normal;
             }
 
-            var poolGO = PoolManager.Get(PoolPrefabPath);
+            var poolGO = PoolManager.Get(PuddlePrefabKey);
             if (poolGO == null)
                 return;
 

@@ -12,7 +12,12 @@ mkdir -p "$OUT_DIR"
 if command -v dotnet >/dev/null 2>&1; then
   echo "Building with dotnet"
   pushd build >/dev/null
-  dotnet build -c Release
+  if [ -z "$UNITY_DLL" ] || [ -z "$MELON_DLL" ]; then
+    echo "ERROR: UNITY_DLL and MELON_DLL must be provided for a valid build."
+    echo "Usage: UNITY_DLL=\"/path/to/UnityEngine.dll\" MELON_DLL=\"/path/to/MelonLoader.dll\" ./build/build.sh"
+    exit 1
+  fi
+  dotnet build -c Release /p:UNITY_DLL="$UNITY_DLL" /p:MELON_DLL="$MELON_DLL"
   popd >/dev/null
   echo "Build complete: build_out/BloodLabMod.dll"
   exit 0

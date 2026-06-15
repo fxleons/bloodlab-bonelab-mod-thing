@@ -6,6 +6,7 @@ namespace BloodLabMod.Core
     // Handles physics-based blood droplets
     public static class DropletManager
     {
+        private const string DropletPrefabKey = "BloodDroplet";
         private static List<BloodDroplet> droplets = new List<BloodDroplet>();
 
         public static void Initialize() { }
@@ -28,8 +29,7 @@ namespace BloodLabMod.Core
 
         private static void SpawnDroplet(Vector3 pos, Vector3 velocity, float volume)
         {
-            var prefabPath = "BloodPrefabs/BloodDroplet";
-            var go = PoolManager.Get(prefabPath);
+            var go = PoolManager.Get(DropletPrefabKey);
             if (go == null) return;
             go.transform.position = pos;
             go.transform.rotation = Random.rotation;
@@ -51,7 +51,7 @@ namespace BloodLabMod.Core
                 {
                     droplets.RemoveAt(i);
                     PuddleManager.SeedPuddle(d.Position, d.Volume, d.LastNormal);
-                    PoolManager.Release("BloodPrefabs/BloodDroplet", d.gameObject);
+                    PoolManager.Release(DropletPrefabKey, d.gameObject);
                 }
             }
         }

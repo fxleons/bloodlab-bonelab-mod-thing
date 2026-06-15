@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Bloodworks_RagdollCompatible_Bonelab")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+2ae9a56c88dab6088d118b3893a8c2793825a071")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+d0d90c62c31f6e7fdd5fac5cf09b378db4375b29")]
 [assembly: System.Reflection.AssemblyProductAttribute("Bloodworks_RagdollCompatible_Bonelab")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Bloodworks_RagdollCompatible_Bonelab")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
