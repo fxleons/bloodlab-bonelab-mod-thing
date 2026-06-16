@@ -1,4 +1,5 @@
 <Project Sdk="Microsoft.NET.Sdk">
+
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
     <OutputPath>build_out</OutputPath>
@@ -9,71 +10,56 @@
     <EnableDefaultCompileItems>false</EnableDefaultCompileItems>
     <UseStubs Condition=" '$(UseStubs)' == '' ">false</UseStubs>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(UNITY_REF_DIR)' != '' ">
-    <ReferencePath>$(UNITY_REF_DIR);$(ReferencePath)</ReferencePath>
-  </PropertyGroup>
+
   <ItemGroup>
     <Compile Include="..\ModSource\**\*.cs" />
   </ItemGroup>
+
+  <!-- STUBS (opcional) -->
   <ItemGroup Condition=" '$(UseStubs)' == 'true' ">
     <Compile Include="stubs\**\*.cs" />
   </ItemGroup>
+
+  <!-- MELON + UNITY CORE (IMPORTANTES) -->
   <ItemGroup Condition=" '$(UseStubs)' != 'true' ">
-    <Reference Include="UnityEngine">
-      <HintPath>$(UNITY_DLL)</HintPath>
-      <Private>false</Private>
-    </Reference>
     <Reference Include="MelonLoader">
       <HintPath>$(MELON_DLL)</HintPath>
       <Private>false</Private>
     </Reference>
+
+    <Reference Include="UnityEngine.CoreModule">
+      <HintPath>$(UNITY_REF_DIR)\UnityEngine.CoreModule.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+
+    <Reference Include="UnityEngine.PhysicsModule">
+      <HintPath>$(UNITY_REF_DIR)\UnityEngine.PhysicsModule.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+
+    <Reference Include="UnityEngine.AnimationModule">
+      <HintPath>$(UNITY_REF_DIR)\UnityEngine.AnimationModule.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
   </ItemGroup>
+
+  <!-- VALIDATION -->
   <Target Name="ValidateReferences" BeforeTargets="Build">
-    <Error Condition=" '$(UseStubs)' != 'true' and ( '$(UNITY_DLL)' == '' Or '$(MELON_DLL)' == '' ) " Text="Missing UNITY_DLL or MELON_DLL. Provide actual UnityEngine.dll and MelonLoader.dll references for a real build." />
+    <Error Condition=" '$(UseStubs)' != 'true' and ( '$(UNITY_REF_DIR)' == '' Or '$(MELON_DLL)' == '' ) "
+           Text="Missing UNITY_REF_DIR or MELON_DLL. Point them to BONELAB MelonLoader Unity assemblies." />
   </Target>
 
+  <!-- OUTPUT COPY -->
   <Target Name="CopyBuildOutput" AfterTargets="Build">
     <PropertyGroup>
       <RootBuildOut>$(MSBuildProjectDirectory)/../build_out</RootBuildOut>
     </PropertyGroup>
+
     <MakeDir Directories="$(RootBuildOut)" />
-    <Copy SourceFiles="$(OutputPath)$(AssemblyName).dll" DestinationFolder="$(RootBuildOut)" SkipUnchangedFiles="true" />
+
+    <Copy SourceFiles="$(OutputPath)$(AssemblyName).dll"
+          DestinationFolder="$(RootBuildOut)"
+          SkipUnchangedFiles="true" />
   </Target>
 
-  <ItemGroup Condition=" '$(UNITY_DLL)' != '' ">
-    <Reference Include="UnityEngine">
-      <HintPath>$(UNITY_DLL)</HintPath>
-      <Private>false</Private>
-    </Reference>
-  </ItemGroup>
-  <ItemGroup Condition=" '$(MELON_DLL)' != '' ">
-    <Reference Include="MelonLoader">
-      <HintPath>$(MELON_DLL)</HintPath>
-      <Private>false</Private>
-    </Reference>
-  </ItemGroup>
-
-  <ItemGroup Condition=" '$(UNITY_REF_DIR)' != '' ">
-    <!-- Explicit Unity module references for forwarded types -->
-    <Reference Include="UnityEngine.CoreModule" Condition="Exists('$(UNITY_REF_DIR)/UnityEngine.CoreModule.dll')">
-      <HintPath>$(UNITY_REF_DIR)/UnityEngine.CoreModule.dll</HintPath>
-      <Private>false</Private>
-    </Reference>
-    <Reference Include="UnityEngine.PhysicsModule" Condition="Exists('$(UNITY_REF_DIR)/UnityEngine.PhysicsModule.dll')">
-      <HintPath>$(UNITY_REF_DIR)/UnityEngine.PhysicsModule.dll</HintPath>
-      <Private>false</Private>
-    </Reference>
-    <Reference Include="UnityEngine.AnimationModule" Condition="Exists('$(UNITY_REF_DIR)/UnityEngine.AnimationModule.dll')">
-      <HintPath>$(UNITY_REF_DIR)/UnityEngine.AnimationModule.dll</HintPath>
-      <Private>false</Private>
-    </Reference>
-    <Reference Include="UnityEngine.JSONSerializeModule" Condition="Exists('$(UNITY_REF_DIR)/UnityEngine.JSONSerializeModule.dll')">
-      <HintPath>$(UNITY_REF_DIR)/UnityEngine.JSONSerializeModule.dll</HintPath>
-      <Private>false</Private>
-    </Reference>
-    <Reference Include="UnityEngine.InputModule" Condition="Exists('$(UNITY_REF_DIR)/UnityEngine.InputModule.dll')">
-      <HintPath>$(UNITY_REF_DIR)/UnityEngine.InputModule.dll</HintPath>
-      <Private>false</Private>
-    </Reference>
-  </ItemGroup>
 </Project>
