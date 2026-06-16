@@ -15,12 +15,10 @@
     <Compile Include="..\ModSource\**\*.cs" />
   </ItemGroup>
 
-  <!-- STUBS (opcional) -->
   <ItemGroup Condition=" '$(UseStubs)' == 'true' ">
     <Compile Include="stubs\**\*.cs" />
   </ItemGroup>
 
-  <!-- MELON + UNITY CORE (IMPORTANTES) -->
   <ItemGroup Condition=" '$(UseStubs)' != 'true' ">
     <Reference Include="MelonLoader">
       <HintPath>$(MELON_DLL)</HintPath>
@@ -43,13 +41,11 @@
     </Reference>
   </ItemGroup>
 
-  <!-- VALIDATION -->
   <Target Name="ValidateReferences" BeforeTargets="Build">
     <Error Condition=" '$(UseStubs)' != 'true' and ( '$(UNITY_REF_DIR)' == '' Or '$(MELON_DLL)' == '' ) "
-           Text="Missing UNITY_REF_DIR or MELON_DLL. Point them to BONELAB MelonLoader Unity assemblies." />
+           Text="missing UNITY_REF_DIR or MELON_DLL its ggs" />
   </Target>
 
-  <!-- OUTPUT COPY -->
   <Target Name="CopyBuildOutput" AfterTargets="Build">
     <PropertyGroup>
       <RootBuildOut>$(MSBuildProjectDirectory)/../build_out</RootBuildOut>
