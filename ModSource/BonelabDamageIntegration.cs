@@ -7,7 +7,6 @@ namespace BloodLabMod.Core
     public class BonelabDamageIntegration : MonoBehaviour
     {
         private static BonelabDamageIntegration instance;
-        private static bool waitingForScene;
         private float scanTimer = 0f;
         private readonly HashSet<Rigidbody> sourceBodies = new HashSet<Rigidbody>();
         private readonly HashSet<Collider> ragdollColliders = new HashSet<Collider>();
@@ -21,23 +20,6 @@ namespace BloodLabMod.Core
         public static void Initialize()
         {
             if (instance != null) return;
-
-            if (SceneManager.GetActiveScene().isLoaded)
-            {
-                CreateInstance();
-                return;
-            }
-
-            if (waitingForScene) return;
-            SceneManager.sceneLoaded += OnSceneLoaded;
-            waitingForScene = true;
-        }
-
-        private static void OnSceneLoaded(Scene scene, LoadSceneMode mode)
-        {
-            if (instance != null) return;
-            SceneManager.sceneLoaded -= OnSceneLoaded;
-            waitingForScene = false;
             CreateInstance();
         }
 
@@ -50,6 +32,8 @@ namespace BloodLabMod.Core
 
         private void Update()
         {
+            if (!SceneManager.GetActiveScene().isLoaded) return;
+
             scanTimer -= Time.deltaTime;
             if (scanTimer > 0f) return;
             scanTimer = 0.5f;
