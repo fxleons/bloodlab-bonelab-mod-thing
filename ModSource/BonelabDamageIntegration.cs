@@ -1,11 +1,13 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace BloodLabMod.Core
 {
     public class BonelabDamageIntegration : MonoBehaviour
     {
         private static BonelabDamageIntegration instance;
+        private static bool waitingForScene;
         private float scanTimer = 0f;
         private readonly HashSet<Rigidbody> sourceBodies = new HashSet<Rigidbody>();
         private readonly HashSet<Collider> ragdollColliders = new HashSet<Collider>();
@@ -19,6 +21,28 @@ namespace BloodLabMod.Core
         public static void Initialize()
         {
             if (instance != null) return;
+
+            if (SceneManager.GetActiveScene().isLoaded)
+            {
+                CreateInstance();
+                return;
+            }
+
+            if (waitingForScene) return;
+            SceneManager.sceneLoaded += OnSceneLoaded;
+            waitingForScene = true;
+        }
+
+        private static void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+        {
+            if (instance != null) return;
+            SceneManager.sceneLoaded -= OnSceneLoaded;
+            waitingForScene = false;
+            CreateInstance();
+        }
+
+        private static void CreateInstance()
+        {
             var go = new GameObject("BloodLab_BonelabDamageIntegration");
             Object.DontDestroyOnLoad(go);
             instance = go.AddComponent<BonelabDamageIntegration>();
