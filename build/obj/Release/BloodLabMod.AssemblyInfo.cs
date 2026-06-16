@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("BloodLabMod")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Release")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+9c30a20619adc7425fdc406a579956c568772abc")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+11ca7f94485bd7e8c2bd85d3a4401c7c722c8b76")]
 [assembly: System.Reflection.AssemblyProductAttribute("BloodLabMod")]
 [assembly: System.Reflection.AssemblyTitleAttribute("BloodLabMod")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
