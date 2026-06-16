@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 namespace BloodLabMod.Core
 {
@@ -32,8 +31,6 @@ namespace BloodLabMod.Core
 
         private void Update()
         {
-            if (!SceneManager.GetActiveScene().isLoaded) return;
-
             scanTimer -= Time.deltaTime;
             if (scanTimer > 0f) return;
             scanTimer = 0.5f;

@@ -1,0 +1,5 @@
+/workspaces/bloodlab-bonelab-mod-thing/build/obj/Debug/BloodLabMod.GeneratedMSBuildEditorConfig.editorconfig
+/workspaces/bloodlab-bonelab-mod-thing/build/obj/Debug/BloodLabMod.AssemblyInfoInputs.cache
+/workspaces/bloodlab-bonelab-mod-thing/build/obj/Debug/BloodLabMod.AssemblyInfo.cs
+/workspaces/bloodlab-bonelab-mod-thing/build/obj/Debug/BloodLabMod.csproj.CoreCompileInputs.cache
+/workspaces/bloodlab-bonelab-mod-thing/build/obj/Debug/BloodLabMod.sourcelink.json

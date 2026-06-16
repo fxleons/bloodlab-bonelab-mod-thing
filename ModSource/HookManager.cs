@@ -17,27 +17,16 @@ namespace BloodLabMod.Core
         // Call this from actual hit handling (bullets, melee, explosions)
         public static void OnEntityHit(Transform entity, Vector3 hitWorldPos, Vector3 hitNormal, float damage, string bodyPart, GameObject hitSource)
         {
-            // create wound
-            var localPos = entity.InverseTransformPoint(hitWorldPos);
-            var w = WoundManager.CreateWound(entity, localPos, hitNormal, damage, bodyPart);
+            if (entity == null) return;
+            ApplyNativeBloodEffects(entity, hitWorldPos, hitNormal, damage, bodyPart, hitSource);
+        }
 
-            // spawn impact particles and droplets
-            DropletManager.SpawnGore(hitWorldPos, hitNormal, damage * ConfigManager.Settings.BloodMultiplier);
-
-            // track hits for pool spawning conditions. Pools only spawn under corpses after delay.
-            BloodPoolManager.TrackHit(entity, bodyPart, damage, hitSource);
-
-            // spawn wall decals if surface
-            if (hitSource == null)
-            {
-                DecalManager.SpawnWallSplat(hitWorldPos, hitNormal, 1.0f + damage * 0.5f, Mathf.Clamp01(damage*0.2f));
-            }
-
-            // if hit source is a weapon, add blood to it
-            if (hitSource != null)
-            {
-                WeaponBloodManager.AddBloodToWeapon(hitSource.transform, damage * 0.1f);
-            }
+        private static void ApplyNativeBloodEffects(Transform entity, Vector3 hitWorldPos, Vector3 hitNormal, float damage, string bodyPart, GameObject hitSource)
+        {
+            // Intentionally left empty for BONELAB native integration.
+            // Do not spawn custom decals, droplets, puddles, or wounds here.
+            // If BONELAB exposes a native blood effect or damage vfx API,
+            // it should be invoked from this method.
         }
     }
 }
